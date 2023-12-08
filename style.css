@@ -1,4 +1,7 @@
 @charset "UTF-8";
+:root{
+    --mainFont:Arial, Helvetica, sans-serif;
+}
 *{
     margin: 0px;
     padding: 0px;
@@ -15,14 +18,16 @@ header{
     border: 1px solid #aaaaaa;
     background-color: #d8d8d8;
 }
-#valueTester{
-    font-size: 2em;
-}
+
 main{
+    display: flex;
+    flex-direction: column;
     background-color: #808080;
     height: 100%;
+    justify-content: space-between;
 }
 canvas{
+    width: 450px;height: 450px;
     background-color: white;
     border: 1px solid #d3d3d3;
     box-shadow: 3px 3px 3px #0000002f;
@@ -31,10 +36,20 @@ canvas:hover{
     border: 1px solid lightseagreen;
     /*cursor: none;*/
 }
+aside{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+aside > p{
+    font-family: var(--mainFont);
+    font-size: .8em;
+    color: white;
+}
 footer{
     border: 1px solid #aaaaaa;
     background-color: #d8d8d8;
-    font-family: monospace;
+    font-family: var(--mainFont);
 }
 footer > a{
     font-size: 1.5em;

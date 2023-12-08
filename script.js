@@ -1,37 +1,39 @@
-var testVar = 0
-var control = 0
-var altern = true
-var mouseAct = 0
+// variaveis de organização de ações
+var testVar = 0;var control = 0;var altern = true;var mouseAct = 0;
 
-var drawnSpace = window.document.querySelector("#drawnArea")
-var cpx = drawnSpace.getContext("2d")
+//Coletando canvas
+var drawnSpace = window.document.querySelector("#drawnArea");
+var cpx = drawnSpace.getContext("2d");
 
-var x
-var y
+//Mouse X e Y
+var x;var y;
+
 //--------------------     Variaveis     --------------
 
 window.addEventListener('mousemove', (event) => {
     //coletando coordenadas X e Y do mouse
-    x = event.clientX
-    y = event.clientY
+    x = event.clientX;
+    y = event.clientY;
     
     //integrando coordenadas na tela
-    window.document.querySelector("#mouseX").innerHTML="Mouse X: "+x
-    window.document.querySelector("#mouseY").innerHTML="Mouse Y: "+y
+    window.document.querySelector("#mouseX").innerHTML="Mouse X: "+x+" | ";
+    window.document.querySelector("#mouseY").innerHTML="| Mouse Y: "+y+" | ";
 })
 
-function mouseActing(){// alterna true false baseado em mouse pressionado
+function mouseActing(){
+    // alterna true false baseado em mouse pressionado
     mouseAct = !mouseAct
-    window.document.querySelector("#mouseActIs").innerHTML="pressed? "+(mouseAct === true ?"true" :"false");
+    window.document.querySelector("#mouseActIs").innerHTML="| pressed? "+(mouseAct === true ?"true" :"false")+" | ";
 }
 
-window.addEventListener('mouseup', mouseActing)
-window.addEventListener('mousedown', mouseActing)
+// Detecta mouse pressionado ou solto
+window.addEventListener('mouseup', mouseActing);
+window.addEventListener('mousedown', mouseActing);
 
 function addDrawn(){
     //começa o desenho do final e inicia no final para ter delay
     if(mouseAct){// mouse pressionado? true or false
-        cpx.lineTo(x,(y)-150);
+        cpx.lineTo(x,y-150);
         cpx.stroke()
         cpx.beginPath();
         cpx.moveTo(x, y-150);
@@ -42,7 +44,7 @@ function addDrawn(){
     //variavel frames teste
     testVar++
     //refresh
-    window.document.querySelector("#valueTester").innerHTML="f: "+testVar
+    window.document.querySelector("#valueTester").innerHTML="| reflesh: "+testVar+" ||"
 }
 
 function trigger(is){//gatilho de ação de entrada do mouse
