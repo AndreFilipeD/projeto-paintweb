@@ -9,6 +9,12 @@
 }
 html{
     height: 100%;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 body{
     height: 75%;
@@ -18,7 +24,19 @@ header{
     border: 1px solid #aaaaaa;
     background-color: #d8d8d8;
 }
-
+#largDrawn{  
+    height: 100px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+#largDrawn > .penDot{
+    padding: 1px;
+    background-color: black;
+    border-radius: 1000px;
+}
 main{
     display: flex;
     flex-direction: column;
@@ -33,8 +51,8 @@ canvas{
     box-shadow: 3px 3px 3px #0000002f;
 }
 canvas:hover{
-    border: 1px solid lightseagreen;
-    /*cursor: none;*/
+    outline: 1px solid lightseagreen;
+    cursor: none;
 }
 aside{
     display: flex;

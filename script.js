@@ -5,10 +5,13 @@ var testVar = 0;var control = 0;var altern = true;var mouseAct = 0;
 var drawnSpace = window.document.querySelector("#drawnArea");
 var cpx = drawnSpace.getContext("2d");
 
-//Mouse X e Y
-var x;var y;
+//Mouse X, Y e Scroll X, Y
+var x;var y;var scroX=0; var scroY=0;
 
-//--------------------     Variaveis     --------------
+//controle de ferramentas
+var largPen = 1
+
+//--------------------     Variaveis     --------------------
 
 window.addEventListener('mousemove', (event) => {
     //coletando coordenadas X e Y do mouse
@@ -20,23 +23,29 @@ window.addEventListener('mousemove', (event) => {
     window.document.querySelector("#mouseY").innerHTML="| Mouse Y: "+y+" | ";
 })
 
-function mouseActing(){
-    // alterna true false baseado em mouse pressionado
-    mouseAct = !mouseAct
+window.addEventListener('scroll', ()=>{
+    scroX = this.scrollX;
+    scroY = this.scrollY;
+
+    window.document.querySelector("#scX").innerHTML="| scroll X:"+scroX+" |"
+    window.document.querySelector("#scY").innerHTML="| scroll Y:"+scroY+" |"
+})
+
+function mAct(){
     window.document.querySelector("#mouseActIs").innerHTML="| pressed? "+(mouseAct === true ?"true" :"false")+" | ";
 }
 
 // Detecta mouse pressionado ou solto
-window.addEventListener('mouseup', mouseActing);
-window.addEventListener('mousedown', mouseActing);
+window.addEventListener('mouseup', ()=>{mouseAct=false;mAct()});
+window.addEventListener('mousedown', ()=>{mouseAct=true;mAct()});
 
 function addDrawn(){
     //começa o desenho do final e inicia no final para ter delay
     if(mouseAct){// mouse pressionado? true or false
-        cpx.lineTo(x,y-150);
+        cpx.lineTo(x+scroX,y-(150-scroY));
         cpx.stroke()
         cpx.beginPath();
-        cpx.moveTo(x, y-150);
+        cpx.moveTo(x+scroX, y-(150-scroY));
     }else{
         cpx.beginPath();
         cpx.stroke();
@@ -44,7 +53,7 @@ function addDrawn(){
     //variavel frames teste
     testVar++
     //refresh
-    window.document.querySelector("#valueTester").innerHTML="| reflesh: "+testVar+" ||"
+    window.document.querySelector("#valueTester").innerHTML="| refresh: "+testVar+" ||"
 }
 
 function trigger(is){//gatilho de ação de entrada do mouse
@@ -57,4 +66,16 @@ function trigger(is){//gatilho de ação de entrada do mouse
         cpx.beginPath();
         cpx.stroke();
     }
+}
+//-------------------------------------------------------------
+function largpenChange(){
+    
+    if(largPen > 10){
+        largPen = 1
+    }else{
+        largPen++
+    }
+    cpx.lineWidth = largPen
+    cpx.lineHeight = largPen
+    window.document.querySelector(".penDot").style=`padding: ${largPen}px;background-color: black;border-radius: 1000px;`
 }
