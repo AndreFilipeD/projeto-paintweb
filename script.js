@@ -40,12 +40,23 @@ window.addEventListener('mouseup', ()=>{mouseAct=false;mAct()});
 window.addEventListener('mousedown', ()=>{mouseAct=true;mAct()});
 
 function addDrawn(){
+    updatePen()
     //começa o desenho do final e inicia no final para ter delay
     if(mouseAct){// mouse pressionado? true or false
+        
         cpx.lineTo(x+scroX,y-(150-scroY));
         cpx.stroke()
+
+        cpx.beginPath();
+        cpx.arc(x+scroX, y-(150-scroY), (largPen)/2.2, 0, 2 * Math.PI);
+        cpx.fill();
+
         cpx.beginPath();
         cpx.moveTo(x+scroX, y-(150-scroY));
+
+        
+        
+        
     }else{
         cpx.beginPath();
         cpx.stroke();
@@ -55,12 +66,16 @@ function addDrawn(){
     //refresh
     window.document.querySelector("#valueTester").innerHTML="| refresh: "+testVar+" ||"
 }
-
+function updatePen(){
+    window.document.querySelector(".pen").style=`left:${x-6+scroX}px;top:${y-(41-scroY)}px;`
+}
 function trigger(is){//gatilho de ação de entrada do mouse
     if(is==='on'){//gatilho ativado
         control = is;
         timeloop = setInterval(addDrawn, 0);// numero é delay
+        window.document.querySelector(".pen").style=`display:block;left:${x-6+scroX}px;top:${y-(41-scroY)}px;`
     }else{//gatilho desativado
+        window.document.querySelector(".pen").style=`display:none;left:${x-6+scroX}px;top:${y-(41-scroY)}px;`
         control = 0;
         clearInterval(timeloop);
         cpx.beginPath();
