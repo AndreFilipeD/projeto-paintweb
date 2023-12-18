@@ -5,11 +5,19 @@ var testVar = 0;var control = 0;var altern = true;var mouseAct = 0;
 var drawnSpace = window.document.querySelector("#drawnArea");
 var cpx = drawnSpace.getContext("2d");
 
-//Mouse X, Y e Scroll X, Y
-var x;var y;var scroX=0; var scroY=0;
-
 //controle de ferramentas
 var largPen = 1
+
+cpx.lineWidth = cpx.lineHeight = largPen
+
+//Mouse X, Y e Scroll X, Y
+var x, y, scroX=0, scroY=0;
+//Extra Y Header Size
+var element = window.document.querySelector(".headerElem")
+var stylelement = window.getComputedStyle(element) 
+var headerY = Number(stylelement.getPropertyValue('height').replace('px',''))
+
+window.alert()
 
 //--------------------     Variaveis     --------------------
 
@@ -44,19 +52,20 @@ function addDrawn(){
     //começa o desenho do final e inicia no final para ter delay
     if(mouseAct){// mouse pressionado? true or false
         
-        cpx.lineTo(x+scroX,y-(150-scroY));
+        cpx.lineTo(x+scroX,y-(headerY-scroY));
         cpx.stroke()
-
+        if(largPen != 1){
+            cpx.beginPath();
+            cpx.arc(x+scroX, y-(headerY-scroY), (largPen)/2.5, 0, 2 * Math.PI);
+            cpx.fill();
+        }else if(largPen>1 && largPen < 3){
+            cpx.beginPath();
+            cpx.arc(x+scroX, y-(headerY-scroY), (largPen)/4, 0, 2 * Math.PI);
+            cpx.fill();
+        }
         cpx.beginPath();
-        cpx.arc(x+scroX, y-(150-scroY), (largPen)/2.2, 0, 2 * Math.PI);
-        cpx.fill();
+        cpx.moveTo(x+scroX, y-(headerY-scroY));
 
-        cpx.beginPath();
-        cpx.moveTo(x+scroX, y-(150-scroY));
-
-        
-        
-        
     }else{
         cpx.beginPath();
         cpx.stroke();
@@ -67,7 +76,7 @@ function addDrawn(){
     window.document.querySelector("#valueTester").innerHTML="| refresh: "+testVar+" ||"
 }
 function updatePen(){
-    window.document.querySelector(".pen").style=`left:${x-6+scroX}px;top:${y-(41-scroY)}px;`
+    window.document.querySelector(".pen").style=`left:${x-8+scroX}px;top:${y-(40-scroY)}px;`
 }
 function trigger(is){//gatilho de ação de entrada do mouse
     if(is==='on'){//gatilho ativado
@@ -90,7 +99,6 @@ function largpenChange(){
     }else{
         largPen++
     }
-    cpx.lineWidth = largPen
-    cpx.lineHeight = largPen
+    cpx.lineWidth = cpx.lineHeight = largPen
     window.document.querySelector(".penDot").style=`padding: ${largPen}px;background-color: black;border-radius: 1000px;`
 }
