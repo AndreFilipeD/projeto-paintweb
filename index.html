@@ -10,9 +10,20 @@
 <body>
     <img class="pen" src="images/stylus.png" alt="pagePen">
 <header class="headerElem">
-    <div id="largDrawn" onclick="largpenChange()">
-        <div class="penDot"></div>
+    <div class="headerBox">
+        <h2>Tools</h2>
+        <input type="color">
+        <div id="largDrawn" onclick="largpenChange()">
+            <div class="penDot"></div>
+        </div>
     </div>
+    <div class="headerBox">
+        BRUSH
+    </div>
+    <div class="headerBox">
+        SETTINGS
+    </div>
+    
 </header>
 <main>
     <canvas id="drawnArea" width="450" height="450" onmouseenter="trigger('on')" onmouseout="trigger('off')">Não foi possivel carregar o canvas.</canvas>

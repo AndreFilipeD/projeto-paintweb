@@ -17,8 +17,6 @@ var element = window.document.querySelector(".headerElem")
 var stylelement = window.getComputedStyle(element) 
 var headerY = Number(stylelement.getPropertyValue('height').replace('px',''))
 
-window.alert()
-
 //--------------------     Variaveis     --------------------
 
 window.addEventListener('mousemove', (event) => {
